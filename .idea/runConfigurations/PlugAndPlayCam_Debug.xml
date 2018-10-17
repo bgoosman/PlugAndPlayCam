@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="PlugAndPlayCam Debug" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="PlugAndPlayCam" TARGET_NAME="PlugAndPlayCam" CONFIG_NAME="Debug" SCHEME_NAME="PlugAndPlayCam Debug" RUN_TARGET_PROJECT_NAME="PlugAndPlayCam" RUN_TARGET_NAME="PlugAndPlayCam" MAKE_ACTIVE="TRUE">
+    <envs />
+    <method />
+  </configuration>
+</component>
