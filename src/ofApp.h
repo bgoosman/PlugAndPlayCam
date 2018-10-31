@@ -32,4 +32,6 @@ public:
     std::shared_ptr<ofAppBaseWindow> myWindow;
     ofxBenG::playmodes *playModes;
     ofxBenG::monitor_manager *monitorManager;
+    ofxBenG::timeline *timeline;
+    ofxBenG::ableton *ableton;
 };

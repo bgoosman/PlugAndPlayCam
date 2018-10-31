@@ -6,6 +6,8 @@ ofApp::ofApp(std::shared_ptr<ofAppBaseWindow> myWindow) :
 
 ofApp::~ofApp() {
     delete playModes;
+    delete ableton;
+    delete timeline;
 }
 
 //--------------------------------------------------------------
@@ -14,21 +16,25 @@ void ofApp::setup() {
     int const desiredWidth = 800;
     int const desiredHeight = 600;
     int const desiredFps = 30;
-    int const defaultBufferSize = 300;
+    int const defaultBufferSize = 1;
+    double const beatsPerMinute = 60;
     playModes = new ofxBenG::playmodes(desiredWidth, desiredHeight, desiredFps, defaultBufferSize);
     ofAddListener(playModes->onVideoStreamAdded, this, &ofApp::onVideoStreamAdded);
     ofAddListener(playModes->onVideoStreamRemoved, this, &ofApp::onVideoStreamRemoved);
     monitorManager = new ofxBenG::monitor_manager();
     ofAddListener(monitorManager->onMonitorAdded, this, &ofApp::onMonitorAdded);
     ofAddListener(monitorManager->onMonitorRemoved, this, &ofApp::onMonitorRemoved);
+    ableton = new ofxBenG::ableton();
+    ableton->setupLink(beatsPerMinute, 8.0);
+    timeline = new ofxBenG::timeline();
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
-    if (playModes != nullptr) {
-        playModes->update();
-        monitorManager->update();
-    }
+    float const currentBeat = ableton->getBeat();
+    playModes->update();
+    monitorManager->update();
+    timeline->update(currentBeat);
 }
 
 //--------------------------------------------------------------
@@ -65,7 +71,12 @@ void ofApp::keyPressed(int key) {
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
-
+    if (key == 'f') {
+        auto screenZero = playModes->getStream(0)->getScreen();
+        float const blackoutLengthBeats = 0.25;
+        float const videoLengthBeats = 5.0;
+        timeline->schedule(new ofxBenG::flicker(screenZero, blackoutLengthBeats, videoLengthBeats), ableton->getBeat(), 0);
+    }
 }
 
 //--------------------------------------------------------------
