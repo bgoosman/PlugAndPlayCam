@@ -5,9 +5,6 @@ ofApp::ofApp(std::shared_ptr<ofAppBaseWindow> myWindow) :
 }
 
 ofApp::~ofApp() {
-    delete playModes;
-    delete ableton;
-    delete timeline;
 }
 
 //--------------------------------------------------------------
@@ -18,12 +15,13 @@ void ofApp::setup() {
     int const desiredFps = 30;
     int const defaultBufferSize = 1;
     double const beatsPerMinute = 60;
-    playModes = new ofxBenG::playmodes(desiredWidth, desiredHeight, desiredFps, defaultBufferSize);
-    ofAddListener(playModes->onVideoStreamAdded, this, &ofApp::onVideoStreamAdded);
-    ofAddListener(playModes->onVideoStreamRemoved, this, &ofApp::onVideoStreamRemoved);
+    streamManager = new ofxBenG::stream_manager(desiredWidth, desiredHeight, desiredFps, defaultBufferSize);
+    ofAddListener(streamManager->onVideoStreamAdded, this, &ofApp::onVideoStreamAdded);
+    ofAddListener(streamManager->onVideoStreamRemoved, this, &ofApp::onVideoStreamRemoved);
     monitorManager = new ofxBenG::monitor_manager();
     ofAddListener(monitorManager->onMonitorAdded, this, &ofApp::onMonitorAdded);
     ofAddListener(monitorManager->onMonitorRemoved, this, &ofApp::onMonitorRemoved);
+    windowManager = new ofxBenG::window_manager();
     ableton = new ofxBenG::ableton();
     ableton->setupLink(beatsPerMinute, 8.0);
     timeline = new ofxBenG::timeline();
@@ -32,7 +30,7 @@ void ofApp::setup() {
 //--------------------------------------------------------------
 void ofApp::update() {
     float const currentBeat = ableton->getBeat();
-    playModes->update();
+    streamManager->update();
     monitorManager->update();
     timeline->update(currentBeat);
 }
@@ -43,9 +41,9 @@ void ofApp::draw() {
 
 void ofApp::onVideoStreamAdded(ofxBenG::video_stream &stream) {
     std::cout << "onVideoStreamAdded stream: " << stream.getDeviceName() << std::endl;
-    auto anyMonitor = monitorManager->getUnusedMonitor();
-    if (anyMonitor != nullptr) {
-        stream.makeScreen(myWindow, anyMonitor);
+    auto window = windowManager->getWindowWithNoStream();
+    if (window != nullptr) {
+        window->setStream(&stream);
     }
 }
 
@@ -55,10 +53,9 @@ void ofApp::onVideoStreamRemoved(ofxBenG::video_stream &stream) {
 
 void ofApp::onMonitorAdded(ofxBenG::monitor &monitor) {
     std::cout << "Monitor added: " << monitor.toString() << std::endl;
-    auto stream = playModes->getUnusedStream();
-    if (stream != nullptr) {
-        stream->makeScreen(myWindow, &monitor);
-    }
+    auto window = windowManager->makeWindow(myWindow);
+    window->setStream(streamManager->getUnusedStream());
+    window->setMonitor(&monitor);
 }
 
 void ofApp::onMonitorRemoved(ofxBenG::monitor &monitor) {
@@ -72,7 +69,7 @@ void ofApp::keyPressed(int key) {
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
     if (key == 'f') {
-        auto screenZero = playModes->getStream(0)->getScreen();
+        auto screenZero = streamManager->getStream(0)->getScreen();
         float const blackoutLengthBeats = 0.25;
         float const videoLengthBeats = 5.0;
         timeline->schedule(new ofxBenG::flicker(screenZero, blackoutLengthBeats, videoLengthBeats), ableton->getBeat(), 0);

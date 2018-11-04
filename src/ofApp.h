@@ -30,8 +30,9 @@ public:
     void onMonitorRemoved(ofxBenG::monitor &monitor);
 
     std::shared_ptr<ofAppBaseWindow> myWindow;
-    ofxBenG::playmodes *playModes;
+    ofxBenG::stream_manager *streamManager;
     ofxBenG::monitor_manager *monitorManager;
+    ofxBenG::window_manager *windowManager;
     ofxBenG::timeline *timeline;
     ofxBenG::ableton *ableton;
 };
