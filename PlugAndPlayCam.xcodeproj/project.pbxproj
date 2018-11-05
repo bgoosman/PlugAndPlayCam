@@ -44,7 +44,10 @@
 		4F9567361FCF0A1953D1C964 /* USBManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DE18693F7A317DEE53FD0A6F /* USBManager.cpp */; };
 		510CAFE035E576A4E1502D52 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6DEF695B88BA5FAACEAA937 /* UdpSocket.cpp */; };
 		52CBC03535EC31053870669F /* HeaderLooperRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D7B7AA93F08DD671D376C2AE /* HeaderLooperRenderer.cpp */; };
+		58603028BF1398B0C3A781A6 /* flicker_view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 58603F1D67B036B465F18507 /* flicker_view.cpp */; };
 		58603037B4DDE29D36A536DA /* window_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 586038A3292567DE6C9FC82D /* window_manager.cpp */; };
+		58603ABDBE1A64DF6B47DDCA /* window_view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 586034D4244C90ED124B46B1 /* window_view.cpp */; };
+		58603C50E211A0BCD0AF7B60 /* header_view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 586037F764F63723935988D9 /* header_view.cpp */; };
 		5864AD82E20F15536D054EA3 /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF49D76C45D5DB505A234880 /* ofxOscMessage.cpp */; };
 		5A4349E9754D6FA14C0F2A3A /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5DA1C87211D4F6377DA719 /* tinyxmlparser.cpp */; };
 		5C4A4AA5D4784DF23EA43038 /* maxiAtoms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EFA3ACBB8D16CC0DA1E79C6 /* maxiAtoms.cpp */; };
@@ -272,8 +275,14 @@
 		54E601587F612CE38B547E21 /* stream_manager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = stream_manager.h; path = ../../../addons/ofxBenG/src/stream_manager.h; sourceTree = SOURCE_ROOT; };
 		56ED74AD5FC73867F5E046F0 /* photo_c.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = photo_c.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/photo/photo_c.h; sourceTree = SOURCE_ROOT; };
 		57ECB8A844CEA38616B33437 /* DeckLinkAPIConfiguration.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = DeckLinkAPIConfiguration.h; path = ../../../addons/ofxBlackmagic/libs/DeckLink/include/DeckLinkAPIConfiguration.h; sourceTree = SOURCE_ROOT; };
+		586031508AD0314555CB5543 /* flicker_view.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = flicker_view.h; path = ../../../addons/ofxBenG/src/flicker_view.h; sourceTree = "<group>"; };
+		586034D4244C90ED124B46B1 /* window_view.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = window_view.cpp; path = ../../../addons/ofxBenG/src/window_view.cpp; sourceTree = "<group>"; };
 		586035B53C2E6F5459462072 /* window_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = window_manager.h; path = ../../../addons/ofxBenG/src/window_manager.h; sourceTree = "<group>"; };
+		586037F764F63723935988D9 /* header_view.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = header_view.cpp; path = ../../../addons/ofxBenG/src/header_view.cpp; sourceTree = "<group>"; };
+		5860387756A64C66221030F6 /* header_view.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = header_view.h; path = ../../../addons/ofxBenG/src/header_view.h; sourceTree = "<group>"; };
 		586038A3292567DE6C9FC82D /* window_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = window_manager.cpp; path = ../../../addons/ofxBenG/src/window_manager.cpp; sourceTree = "<group>"; };
+		5860390ACBACA4F11961B56A /* window_view.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = window_view.h; path = ../../../addons/ofxBenG/src/window_view.h; sourceTree = "<group>"; };
+		58603F1D67B036B465F18507 /* flicker_view.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = flicker_view.cpp; path = ../../../addons/ofxBenG/src/flicker_view.cpp; sourceTree = "<group>"; };
 		586A4F5ADB50571EE58F9CE0 /* VideoFilter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = VideoFilter.cpp; path = ../../../addons/ofxPlaymodes/src/filters/VideoFilter.cpp; sourceTree = SOURCE_ROOT; };
 		586A8EC141BDFA82B3B0518C /* config.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = config.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/config.h; sourceTree = SOURCE_ROOT; };
 		59570D160E1EDD6EB832826A /* frame_source.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = frame_source.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/videostab/frame_source.hpp; sourceTree = SOURCE_ROOT; };
@@ -1398,6 +1407,12 @@
 				4A4DCFFF9BC5706E260AB806 /* video_stream.h */,
 				586038A3292567DE6C9FC82D /* window_manager.cpp */,
 				586035B53C2E6F5459462072 /* window_manager.h */,
+				586034D4244C90ED124B46B1 /* window_view.cpp */,
+				5860390ACBACA4F11961B56A /* window_view.h */,
+				586037F764F63723935988D9 /* header_view.cpp */,
+				5860387756A64C66221030F6 /* header_view.h */,
+				58603F1D67B036B465F18507 /* flicker_view.cpp */,
+				586031508AD0314555CB5543 /* flicker_view.h */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -2041,6 +2056,9 @@
 				9D44DC88EF9E7991B4A09951 /* tinyxmlerror.cpp in Sources */,
 				5A4349E9754D6FA14C0F2A3A /* tinyxmlparser.cpp in Sources */,
 				58603037B4DDE29D36A536DA /* window_manager.cpp in Sources */,
+				58603ABDBE1A64DF6B47DDCA /* window_view.cpp in Sources */,
+				58603C50E211A0BCD0AF7B60 /* header_view.cpp in Sources */,
+				58603028BF1398B0C3A781A6 /* flicker_view.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

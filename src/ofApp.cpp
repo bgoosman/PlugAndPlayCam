@@ -70,8 +70,8 @@ void ofApp::keyPressed(int key) {
 void ofApp::keyReleased(int key) {
     if (key == 'f') {
         auto screenZero = streamManager->getStream(0)->getScreen();
-        float const blackoutLengthBeats = 0.25;
-        float const videoLengthBeats = 5.0;
+        float const blackoutLengthBeats = 0.05;
+        float const videoLengthBeats = ofxBenG::utilities::secondsToBeats(5, ableton->getTempo());
         timeline->schedule(new ofxBenG::flicker(screenZero, blackoutLengthBeats, videoLengthBeats), ableton->getBeat(), 0);
     }
 }
