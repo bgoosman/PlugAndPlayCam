@@ -72,7 +72,7 @@ void ofApp::keyReleased(int key) {
         auto stream = streamManager->getStream(0);
         float const blackoutLengthBeats = 0.05;
         float const videoLengthBeats = ofxBenG::utilities::secondsToBeats(5, ableton->getTempo());
-        timeline->schedule(new ofxBenG::flicker(stream, blackoutLengthBeats, videoLengthBeats), ableton->getBeat(), 0);
+        timeline->schedule(0, new ofxBenG::flicker(stream, blackoutLengthBeats, videoLengthBeats));
     }
 }
 
