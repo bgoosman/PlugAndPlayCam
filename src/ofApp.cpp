@@ -25,9 +25,10 @@ void ofApp::setup() {
     ableton = new ofxBenG::ableton();
     ableton->setupLink(beatsPerMinute, 8.0);
     timeline = new ofxBenG::timeline();
+    audio = new ofxBenG::audio();
+    ofSoundStreamSetup(2, 0, this, audio->getSampleRate(), audio->getBufferSize(), 4);
 }
 
-//--------------------------------------------------------------
 void ofApp::update() {
     float const currentBeat = ableton->getBeat();
     streamManager->update();
@@ -35,8 +36,15 @@ void ofApp::update() {
     timeline->update(currentBeat);
 }
 
-//--------------------------------------------------------------
 void ofApp::draw() {
+}
+
+void ofApp::audioOut(float* output, int bufferSize, int nChannels) {
+    for (int i = 0; i < bufferSize; i++) {
+        float mix = audio->getMix();
+        output[nChannels * i] = mix;
+        output[nChannels * i + 1] = mix;
+    }
 }
 
 void ofApp::onVideoStreamAdded(ofxBenG::video_stream &stream) {
@@ -72,7 +80,7 @@ void ofApp::keyReleased(int key) {
         auto stream = streamManager->getStream(0);
         float const blackoutLengthBeats = 0.05;
         float const videoLengthBeats = ofxBenG::utilities::secondsToBeats(5, ableton->getTempo());
-        timeline->schedule(0, new ofxBenG::flicker(stream, blackoutLengthBeats, videoLengthBeats));
+        timeline->schedule(0, new ofxBenG::flicker(stream, blackoutLengthBeats, videoLengthBeats, audio));
     }
 }
 

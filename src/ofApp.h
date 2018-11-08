@@ -28,6 +28,7 @@ public:
     void onVideoStreamRemoved(ofxBenG::video_stream &stream);
     void onMonitorAdded(ofxBenG::monitor &monitor);
     void onMonitorRemoved(ofxBenG::monitor &monitor);
+    void audioOut(float *output, int bufferSize, int nChannels);
 
     std::shared_ptr<ofAppBaseWindow> myWindow;
     ofxBenG::stream_manager *streamManager;
@@ -35,4 +36,5 @@ public:
     ofxBenG::window_manager *windowManager;
     ofxBenG::timeline *timeline;
     ofxBenG::ableton *ableton;
+    ofxBenG::audio *audio;
 };
