@@ -22,18 +22,21 @@ void ofApp::setup() {
     ofAddListener(monitorManager->onMonitorAdded, this, &ofApp::onMonitorAdded);
     ofAddListener(monitorManager->onMonitorRemoved, this, &ofApp::onMonitorRemoved);
     windowManager = new ofxBenG::window_manager();
-    ableton = new ofxBenG::ableton();
-    ableton->setupLink(beatsPerMinute, 8.0);
+    ofxBenG::ableton()->setupLink(beatsPerMinute, 8.0);
     timeline = new ofxBenG::timeline();
-    audio = new ofxBenG::audio();
-    ofSoundStreamSetup(2, 0, this, audio->getSampleRate(), audio->getBufferSize(), 4);
+    ofSoundStreamSetup(2, 0, this, ofxBenG::audio()->getSampleRate(), ofxBenG::audio()->getBufferSize(), 4);
+    gasClick = new ofxMaxiSample();
+    gasClick->load("/Users/admin/Dropbox/Audio/other samples/251814__zabuhailo__gasstovelektropod_click1_short.wav");
+    metronome1 = new ofxMaxiSample();
+    metronome1->load("/Users/admin/Dropbox/Audio/other samples/250552__druminfected__metronome.wav");
+    metronome2 = new ofxMaxiSample();
+    metronome2->load("/Users/admin/Dropbox/Audio/other samples/250551__druminfected__metronomeup.wav");
 }
 
 void ofApp::update() {
-    float const currentBeat = ableton->getBeat();
     streamManager->update();
     monitorManager->update();
-    timeline->update(currentBeat);
+    timeline->update();
 }
 
 void ofApp::draw() {
@@ -41,7 +44,7 @@ void ofApp::draw() {
 
 void ofApp::audioOut(float* output, int bufferSize, int nChannels) {
     for (int i = 0; i < bufferSize; i++) {
-        float mix = audio->getMix();
+        float mix = ofxBenG::audio::getInstance()->getMix();
         output[nChannels * i] = mix;
         output[nChannels * i + 1] = mix;
     }
@@ -79,9 +82,53 @@ void ofApp::keyReleased(int key) {
     if (key == 'f') {
         auto stream = streamManager->getStream(0);
         float const blackoutLengthBeats = 0.05;
-        float const videoLengthBeats = ofxBenG::utilities::secondsToBeats(5, ableton->getTempo());
-        timeline->schedule(0, new ofxBenG::flicker(stream, blackoutLengthBeats, videoLengthBeats, audio));
+        float const videoLengthBeats = ofxBenG::utilities::secondsToBeats(5, ofxBenG::ableton()->getTempo());
+        timeline->scheduleNextWholeBeat(new ofxBenG::flicker(stream, blackoutLengthBeats, videoLengthBeats));
     }
+
+    if (key == 's') {
+        timeline->scheduleNextWholeBeat(new ofxBenG::generic_action([this]() {
+            ofxBenG::ableton()->setClockToZero();
+            scheduleNextMeasure();
+        }));
+    }
+}
+
+void ofApp::scheduleNextMeasure() {
+    int const measure = ((int) floor(ofxBenG::ableton()->getBeat())) / 4;
+
+    if (measure % 2 == 0) {
+        auto stream = streamManager->getStream(0);
+        float const blackoutLengthBeats = 0.05;
+        float const videoLengthBeats = 4;
+        timeline->schedule(0, new ofxBenG::flicker(stream, blackoutLengthBeats, videoLengthBeats));
+    }
+
+//    if (measure % 3 == 0) {
+//        std::cout << ofxBenG::ableton()->getBeat() << ": setTempo(30)" << std::endl;
+//        ofxBenG::ableton()->setTempo(30);
+//    } else {
+//        std::cout << ofxBenG::ableton()->getBeat() << ": setTempo(60)" << std::endl;
+//        ofxBenG::ableton()->setTempo(60);
+//    }
+
+    timeline->schedule(1, [this]() {
+        std::cout << ofxBenG::ableton()->getBeat() << ": play metronome1" << std::endl;
+        ofxBenG::audio()->playSample(metronome1);
+    });
+    timeline->schedule(2, [this]() {
+        std::cout << ofxBenG::ableton()->getBeat() << ": play metronome1" << std::endl;
+        ofxBenG::audio()->playSample(metronome1);
+    });
+    timeline->schedule(3, [this]() {
+        std::cout << ofxBenG::ableton()->getBeat() << ": play metronome2" << std::endl;
+        ofxBenG::audio()->playSample(metronome2);
+    });
+    timeline->schedule(4, [this]() {
+        std::cout << ofxBenG::ableton()->getBeat() << ": play gasClick" << std::endl;
+        ofxBenG::audio()->playSample(gasClick);
+        scheduleNextMeasure();
+    });
 }
 
 //--------------------------------------------------------------

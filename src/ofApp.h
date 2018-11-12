@@ -5,7 +5,6 @@
 #include <functional>
 
 class ofApp : public ofBaseApp {
-
 public:
     ofApp(std::shared_ptr<ofAppBaseWindow> mainWindow);
     ~ofApp();
@@ -29,12 +28,14 @@ public:
     void onMonitorAdded(ofxBenG::monitor &monitor);
     void onMonitorRemoved(ofxBenG::monitor &monitor);
     void audioOut(float *output, int bufferSize, int nChannels);
+    void scheduleNextMeasure();
 
+    ofxMaxiSample *gasClick;
+    ofxMaxiSample *metronome1;
+    ofxMaxiSample *metronome2;
     std::shared_ptr<ofAppBaseWindow> myWindow;
     ofxBenG::stream_manager *streamManager;
     ofxBenG::monitor_manager *monitorManager;
     ofxBenG::window_manager *windowManager;
     ofxBenG::timeline *timeline;
-    ofxBenG::ableton *ableton;
-    ofxBenG::audio *audio;
 };
