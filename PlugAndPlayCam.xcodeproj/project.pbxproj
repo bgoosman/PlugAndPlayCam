@@ -328,7 +328,6 @@
 		73CB9E4F6812598081C2FE01 /* opengl_interop.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = opengl_interop.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/opengl_interop.hpp; sourceTree = SOURCE_ROOT; };
 		74889E354F64911B56A1CAD1 /* warp.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = warp.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/gpu/device/warp.hpp; sourceTree = SOURCE_ROOT; };
 		758F19335D4E46A5E0DE449F /* kdtree_single_index.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = kdtree_single_index.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/kdtree_single_index.h; sourceTree = SOURCE_ROOT; };
-		75BE6926C740966DDC5B4205 /* ofxBenG.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxBenG.h; path = ../../../addons/ofxBenG/src/ofxBenG.h; sourceTree = SOURCE_ROOT; };
 		764A89DCC76052D47351ED80 /* TripleBuffer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = TripleBuffer.h; path = ../../../addons/ofxBlackmagic/src/TripleBuffer.h; sourceTree = SOURCE_ROOT; };
 		766536E8D155E99427BFABED /* twister.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = twister.h; path = ../../../addons/ofxBenG/src/twister.h; sourceTree = SOURCE_ROOT; };
 		7673F0AA19794A4C9517CF14 /* ts.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ts.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/ts/ts.hpp; sourceTree = SOURCE_ROOT; };
@@ -1390,7 +1389,6 @@
 				AA8B04B8A1D5711746E16D3A /* monitor.h */,
 				ACB7F8CE737F1A534D16B8EC /* monitor_manager.cpp */,
 				90D4AFCF27C942F1DABD9246 /* monitor_manager.h */,
-				75BE6926C740966DDC5B4205 /* ofxBenG.h */,
 				C99D5D0A3E96D087B58CFC46 /* oscWrapper.h */,
 				EA82CC0EA6BA6F4C64A1C14C /* stream_manager.cpp */,
 				54E601587F612CE38B547E21 /* stream_manager.h */,

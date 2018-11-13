@@ -1,7 +1,12 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxBenG.h"
+#include "beat_action.h"
+#include "video_stream.h"
+#include "monitor.h"
+#include "stream_manager.h"
+#include "monitor_manager.h"
+#include "window_manager.h"
 #include <functional>
 
 class ofApp : public ofBaseApp {
@@ -33,6 +38,9 @@ public:
     ofxMaxiSample *gasClick;
     ofxMaxiSample *metronome1;
     ofxMaxiSample *metronome2;
+    ofxMaxiSample *forgetYou;
+    ofxMaxiSample *youMay;
+    ofxMaxiSample *growUp;
     std::shared_ptr<ofAppBaseWindow> myWindow;
     ofxBenG::stream_manager *streamManager;
     ofxBenG::monitor_manager *monitorManager;

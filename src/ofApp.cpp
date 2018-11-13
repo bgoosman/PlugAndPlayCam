@@ -24,13 +24,20 @@ void ofApp::setup() {
     windowManager = new ofxBenG::window_manager();
     ofxBenG::ableton()->setupLink(beatsPerMinute, 8.0);
     timeline = new ofxBenG::timeline();
-    ofSoundStreamSetup(2, 0, this, ofxBenG::audio()->getSampleRate(), ofxBenG::audio()->getBufferSize(), 4);
+    ofSoundStreamSetup(2, 0, this, ofxBenG::audio::getInstance()->getSampleRate(), ofxBenG::audio::getInstance()->getBufferSize(), 4);
     gasClick = new ofxMaxiSample();
     gasClick->load("/Users/admin/Dropbox/Audio/other samples/251814__zabuhailo__gasstovelektropod_click1_short.wav");
     metronome1 = new ofxMaxiSample();
     metronome1->load("/Users/admin/Dropbox/Audio/other samples/250552__druminfected__metronome.wav");
     metronome2 = new ofxMaxiSample();
     metronome2->load("/Users/admin/Dropbox/Audio/other samples/250551__druminfected__metronomeup.wav");
+    forgetYou = new ofxMaxiSample();
+    forgetYou->load("/Users/admin/Dropbox/Audio/other samples/Panda Bear - Bros/forget-you.wav");
+    forgetYou->setVolume(0.5);
+    youMay = new ofxMaxiSample();
+    youMay->load("/Users/admin/Dropbox/Audio/other samples/Panda Bear - Bros/you-may.wav");
+    growUp = new ofxMaxiSample();
+    growUp->load("/Users/admin/Dropbox/Audio/other samples/Panda Bear - Bros/grow-up.wav");
 }
 
 void ofApp::update() {
@@ -87,7 +94,7 @@ void ofApp::keyReleased(int key) {
     }
 
     if (key == 's') {
-        timeline->scheduleNextWholeBeat(new ofxBenG::generic_action([this]() {
+        timeline->scheduleNextWholeMeasure(new ofxBenG::generic_action([this]() {
             ofxBenG::ableton()->setClockToZero();
             scheduleNextMeasure();
         }));
@@ -102,6 +109,9 @@ void ofApp::scheduleNextMeasure() {
         float const blackoutLengthBeats = 0.05;
         float const videoLengthBeats = 4;
         timeline->schedule(0, new ofxBenG::flicker(stream, blackoutLengthBeats, videoLengthBeats));
+        timeline->schedule(0, new ofxBenG::generic_action([this]() {
+            ofxBenG::audio::getInstance()->playSample(forgetYou);
+        }));
     }
 
 //    if (measure % 3 == 0) {
@@ -112,23 +122,23 @@ void ofApp::scheduleNextMeasure() {
 //        ofxBenG::ableton()->setTempo(60);
 //    }
 
-    timeline->schedule(1, [this]() {
+    timeline->schedule(1, new ofxBenG::generic_action([this]() {
         std::cout << ofxBenG::ableton()->getBeat() << ": play metronome1" << std::endl;
-        ofxBenG::audio()->playSample(metronome1);
-    });
-    timeline->schedule(2, [this]() {
+        ofxBenG::audio::getInstance()->playSample(metronome1);
+    }));
+    timeline->schedule(2, new ofxBenG::generic_action([this]() {
         std::cout << ofxBenG::ableton()->getBeat() << ": play metronome1" << std::endl;
-        ofxBenG::audio()->playSample(metronome1);
-    });
-    timeline->schedule(3, [this]() {
+        ofxBenG::audio::getInstance()->playSample(metronome1);
+    }));
+    timeline->schedule(3, new ofxBenG::generic_action([this]() {
         std::cout << ofxBenG::ableton()->getBeat() << ": play metronome2" << std::endl;
-        ofxBenG::audio()->playSample(metronome2);
-    });
-    timeline->schedule(4, [this]() {
+        ofxBenG::audio::getInstance()->playSample(metronome2);
+    }));
+    timeline->schedule(4, new ofxBenG::generic_action([this]() {
         std::cout << ofxBenG::ableton()->getBeat() << ": play gasClick" << std::endl;
-        ofxBenG::audio()->playSample(gasClick);
+        ofxBenG::audio::getInstance()->playSample(gasClick);
         scheduleNextMeasure();
-    });
+    }));
 }
 
 //--------------------------------------------------------------
